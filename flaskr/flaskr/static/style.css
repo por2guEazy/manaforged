@@ -181,13 +181,21 @@ header {
 
 }
 /************** FOOTER ***************/
-footer {
+.footer-content {
   display: flex;
   width: 100%;
   background-color: #d6ffd6;
-  margin-bottom: auto;
+  border: 1px solid yellow;
+}
+.copy-right {
+  border: 1px solid blue;
 
 }
+.contact-info {
+  border: 1px solid pink;
+
+}
+
 /****************************  END MAIN PAGE  *************************************/
 
 /****************************  OTHER PAGES  *************************************/
