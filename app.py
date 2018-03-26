@@ -10,12 +10,12 @@ def index():
 
 @app.route('/about/')
 def about():
-    return  render_template('./about.html')
+    return  render_template('about.html')
 
 
 @app.route('/try')
 def try_it():
-    return  render_template('./try.html')
+    return  render_template('try.html')
 
 
 @app.route('/how')
