@@ -1,32 +1,9 @@
-<!-- ABOUT MANAFORGED PAGE -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>About Manaforged</title>
-        <link rel="stylesheet" href="./style.css">
-        <script src="./index.js"></script>
-        <link rel="icon" href="../static/images/currency_symbol.jpeg" type="img/jpg">
-        <!-- This is a 3rd-party stylesheet to include Font Awesome icons: http://fontawesome.io/ -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
-    </head>
-    <body>
-      <!-- *********** NAV and HEADER *********** -->
-      <header>
-          <div class="home-icon-container">
-            <a class="home-icon" href="index"><i class="fa fa-home"></i></a>
-          </div>
-          <div class="title-container">
-            <h1 class="site-title">About Manaforged</h1>
-          </div>
-          <div class="ruble-icon-container">
-            <button class="ruble-icon"><i class="fa fa-ruble"></i></button>
-          </div>
-      </header>
+{% extends "layout.html" %}
+{% block body %}
       <!-- *********** ABOUT CONTENT *********** -->
       <main class="about-content">
         <div class="card" id="how-card">
-          <img class="card-img" src="./images/sickle_hammer.png">
+          <img class="card-img" src="{{ url_for('static', filename="images/sickle_hammer.png") }}">
             <h4>ABOUT MANAFORGED</h4>
         </div>
         <div class="info-container">
@@ -41,13 +18,4 @@
       <div class="try-it-btn-container">
         <button id="try-it-button" class="action-button">Try It</button>
       </div>
-      <!-- *********** FOOTER *********** -->
-      <div class="footer-content">
-        <footer>
-          <p class="contact-info">Contact Info: <a href="mailto:someone@example.com">
-              someone@example.com</a>.</p>
-          <p class="copy-right">© Eli Sandine 2018 Using PDF Miner from GitHub</p>
-        </footer>
-    </div>
-    </body>
-</html>
+{% endblock %}
