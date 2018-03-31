@@ -52,9 +52,9 @@ header {
   width: auto;
   margin: 1px 0px;
 }
-.home-icon-container:hover {
+.home-icon:hover {
   cursor: pointer;
-  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.2);
+  color: #000;
 }
 
 /************ Navbar - Dropdown menu & ruble icon **************/
@@ -78,7 +78,7 @@ header {
 }
 .ruble-icon:hover{
   cursor: pointer;
-  box-shadow: -1px 1px 1px 0 rgba(0,0,0,0.2);
+  color: #000;
 }
 .ruble-icon-container:focus {
   outline-style: hidden;
