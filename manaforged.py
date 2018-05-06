@@ -13,7 +13,7 @@ from docx.shared import Inches
 """
 # converts pdf to text
 def pdf_to_text(pdf_name):
-    pdf_content = subprocess.check_output(["pdf2txt.py", pdf_name])
+    pdf_content = subprocess.check_output(["./pdf2txt.py", pdf_name])
     return pdf_content
 
 # Need to manaforgize the numbers in here
