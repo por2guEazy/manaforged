@@ -8,11 +8,10 @@
           <p>Then enter a newfile name for your docx version.<br></p>
         </div>
         <div class="input-field-container">
-          <form>
-            PDF Filemame: <input type="text" name="PDF">
-            New Filename: <input type="text" name="WORD">
+          <form method="post" enctype="multipart/form-data">
+            PDF Filemame: <input type="file" name="file">
+            <button id="manaforge" type="submit">MANAFORGE</button>
           </form>
-          <button id="manaforge" type="action-button">MANAFORGE</button>
         </div>
         <div class="info-container">
           <p>Hopefully display the file ready for download in here.<br>

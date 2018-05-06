@@ -1,9 +1,26 @@
 # Flask Server for Manaforged
-from flask import Flask, render_template, url_for
 import os
+import tempfile
+
+from flask import Flask, render_template, url_for, request, redirect, flash, send_file
+from werkzeug.utils import secure_filename
+
+import manaforged
+
+UPLOAD_FOLDER = tempfile.mkdtemp()
+ALLOWED_EXTENSIONS = set(['pdf'])
+
+print("HI")
+print(UPLOAD_FOLDER)
 
 app = Flask(__name__)
+app.secret_key = 'kobe'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/')
 def index():
@@ -15,8 +32,32 @@ def about():
     return  render_template('about.html')
 
 
-@app.route('/try')
+@app.route('/try', methods=['GET', 'POST'])
 def try_it():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+
+	if file.filename == '':
+	    flash('No selected file')
+	    return redirect(request.url)
+	if file and allowed_file(file.filename):
+	    flash('VAN DOWN BY THE RIVER')
+	    filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+            pdf_text = manaforged.pdf_to_text(file_path)
+            print(manaforged.inflate(pdf_text))
+            inflated = manaforged.inflate(pdf_text)
+            document = manaforged.text_to_word_doc(inflated)
+            word_doc_filename =  file_path + '-inflated.docx'
+            document.save(word_doc_filename)
+            return send_file(word_doc_filename) 	
+
     return  render_template('try.html')
 
 

@@ -13,7 +13,6 @@ from docx.shared import Inches
 """
 # converts pdf to text
 def pdf_to_text(pdf_name):
-    pdf_name = sys.argv[1]
     pdf_content = subprocess.check_output(["pdf2txt.py", pdf_name])
     return pdf_content
 
@@ -45,7 +44,7 @@ def inflate(pdf_content, multiplier=2):
     inflated = [
         increase_money(item, multiplier) 
         if re.search(money_pattern, item) is not None 
-        else item for item in pdf_text.split(" ") 
+        else item for item in pdf_content.split(" ") 
         ] 
     return " ".join(inflated)
 

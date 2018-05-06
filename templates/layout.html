@@ -12,6 +12,15 @@
     </head>
     <body>
       <!-- *********** NAV and HEADER *********** -->
+		{% with messages = get_flashed_messages() %}
+		  {% if messages %}
+			<ul class=flashes>
+			{% for message in messages %}
+			  <li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		  {% endif %}
+		{% endwith %}
       <header>
           <div class="home-icon-container">
             <a class="home-icon" href="/"><i class="fa fa-home"></i></a>
