@@ -20,7 +20,6 @@ def pdf_to_text(pdf_name):
 # Need to manaforgize the numbers in here
 def text_to_word_doc(text):
     document = Document()
-    document.add_heading('Document Title', 0)
     lines = text.split('\n')
     # print(lines)
 
@@ -33,24 +32,26 @@ def text_to_word_doc(text):
         document.add_paragraph(clean_pdf_content)
     return document
 
-# Look for money
-def look_for_money(pdf_content):
-    money = re.findall("\$+\d*[.,]\d*[..]\d*", pdf_content)
-    return money
+# Text to PDF 
+def increase_money(item, multiplier=2):
+    item = item.replace("$", "").replace(",", "")
+    as_float = float(item)
+    as_float *= multiplier 
+    as_dollars = '${:,.2f}'.format(as_float)
+    return as_dollars
 
-def increase_money(money):
-    print(money)
-    for item in money:
-        item = item.replace("$", "")
-        item = item.replace(",", "")
-        as_float = float(item)
-        as_float *= 2
-        print(as_float)
-
+def inflate(pdf_content, multiplier=2):
+    money_pattern = "\$+\d*[.,]\d*[..]\d*"
+    inflated = [
+        increase_money(item, multiplier) 
+        if re.search(money_pattern, item) is not None 
+        else item for item in pdf_text.split(" ") 
+        ] 
+    return " ".join(inflated)
 
 if __name__ == "__main__":
     pdf_text =  pdf_to_text(sys.argv[1])
-    money = look_for_money(pdf_text)
-    increase_money(money)
-    document = text_to_word_doc(pdf_text)
+    print(inflate(pdf_text))
+    inflated = inflate(pdf_text)
+    document = text_to_word_doc(inflated)
     document.save('demo.docx')
