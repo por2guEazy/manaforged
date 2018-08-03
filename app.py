@@ -3,6 +3,7 @@ import os
 import tempfile
 
 from flask import Flask, render_template, url_for, request, redirect, flash, send_file
+
 from werkzeug.utils import secure_filename
 
 import manaforged
@@ -40,13 +41,13 @@ def try_it():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
-
-	if file.filename == '':
-	    flash('No selected file')
-	    return redirect(request.url)
-	if file and allowed_file(file.filename):
-	    flash('VAN DOWN BY THE RIVER')
-	    filename = secure_filename(file.filename)
+        
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            flash('VAN DOWN BY THE RIVER')
+            filename = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
 
